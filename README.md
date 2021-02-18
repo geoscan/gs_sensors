@@ -19,30 +19,39 @@
 Без параметров
 
 #### Поля:
+* error_number - float
+* __battery_state - gs_interfaces.msg.SimpleBatteryState
+* __gyro - geometry_msgs.msg.Point
+* __accel - geometry_msgs.msg.Point
+* __orientation - gs_interfaces.msg.Orientation
+* __altitude - float
+* __mag - geometry_msgs.msg.Point
 * __alive - rospy.ServiceProxy: gs_interfaces.srv.Live
-* __lpsvel_service - rospy.ServiceProxy: gs_interfaces.srv.LpsVel
-* __lpsyaw_service - rospy.ServiceProxy: gs_interfaces.srv.LpsYaw
-* __gyro_service - rospy.ServiceProxy: gs_interfaces.srv.Gyro
-* __accel_service - rospy.ServiceProxy: gs_interfaces.srv.Accel
-* __orientation_service - rospy.ServiceProxy: gs_interfaces.srv.Orientation
-* __altitude_service - rospy.ServiceProxy: gs_interfaces.srv.Altitude
+* __gyro_subscriber - rospy.Subscriber: geometry_msgs.msg.Point
+* __accel_subscriber - rospy.Subscriber: geometry_msgs.msg.Point
+* __orientation_subscriber - rospy.Subscriber: gs_interfaces.msg.Orientation
+* __altitude_subscriber - rospy.Subscriber: std_msgs.msg.Float32
+* __mag_subscriber - rospy.Subscriber: geometry_msgs.msg.Point
+* __power_subscriber - rospy.Subscriber: gs_interfaces.msg.SimpleBatteryState
 
 #### Методы:
-* lpsVelocity - возвращает скорость коптера возвращаемую LPS (vx,vy,vz)
-* lpsYaw - возвращает угол поворота в системе LPS
 * gyro - возвращает данные c гироскопа (gx,gy,gz)
 * accel -  возвращает данные c акселерометра (ax,ay,az)
 * orientation - возвращает данные положения (roll,pitch,azimuth)
 * altitude - возвращает данные высоты по барометру
+* mag - возвращает данные с магнитометра
+* power - возвращает заряд АКБ (charge, sec)
 
 #### Используемые сервисы:
 * geoscan/alive (gs_interfaces/Live)
-* geoscan/sensors/lpsvel_service (gs_interfaces/LpsVel)
-* geoscan/sensors/lpsyaw_service (gs_interfaces/LpsYaw)
-* geoscan/sensors/gyro_service (gs_interfaces/Gyro)
-* geoscan/sensors/accel_service (gs_interfaces/Accel)
-* geoscan/sensors/orientation_service (gs_interfaces/Orientation)
-* geoscan/sensors/altitude_service (gs_interfaces/Altitude)
+
+#### Используемые топики:
+* geoscan/sensors/gyro (geometry_msgs/Point)
+* geoscan/sensors/accel (geometry_msgs/Point)
+* geoscan/sensors/orientation (gs_interfaces/Orientation)
+* geoscan/sensors/altitude (std_msgs/Float32)
+* geoscan/sensors/mag (geometry_msgs/Point)
+* geoscan/battery_state (gs_interfaces/SimpleBatteryState)
 
 ## Описание нод:
 
@@ -61,6 +70,7 @@ ROS:
 * gs_interfaces
 * gs_core
 * std_msgs
+* geometry_msgs
 
 ## Примечание:
-Все классы в данном пакете могут быть использованы только при запущеной ноде ros_serial_node.py из пакета gs_core
+Все классы в данном пакете могут быть использованы только при запущеной ноде ros_plaz_node.py из пакета gs_core
