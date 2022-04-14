@@ -1,1 +1,1 @@
-from .core import SensorManager
+from .gs_sensors import SensorManager
